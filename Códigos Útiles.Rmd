@@ -1,0 +1,104 @@
+---
+title: "Códigos útiles"
+author: "Jan Dimter Stransky"
+date: "19-09-2020"
+output: html_document
+---
+# Probados
+
+## Configuración del espacio de trabajo
+### Borrado objetos existentes
+Se borrarán todos los objetos del espacio de trabajo.
+```{r}
+#rm(list=ls())
+```
+
+### Deshabilitar notación científica
+```{r}
+#options(scipen=999)
+```
+
+## Carga de base de datos desde internet
+```{r}
+#load(url("https://multivariada.netlify.com/assignment/data/original/ELSOC_W01_v3.10.RData"))
+```
+
+## Unir
+#### rcbind()
+Unión de rows.
+```{r}
+#Objetos en ejemplo corresponden a data frames
+#df_18 <- rbind(tab_p18c.1,tab_p18c.2,tab_p18c.3,tab_p18c.4,tab_p18c.5,tab_p18c.6,tab_p18c.7,tab_p18c.8)
+```
+
+#### cbind()
+Unión de columnas.
+
+## Filtrado por condiciones múltiples
+```{r Filtrado por condiciones múltiples}
+#DBfiltrada<-DB %>% filter(COMUNA=="Colina"|COMUNA=="Lampa")
+```
+
+## Filtrado por lista de respuestas
+```{r Filtrado por lista de respuestas}
+#Lista <- c("A" , "B" , "C")
+#DBfiltrada<-DB %>% filter(VARIABLE %in% Lista)
+```
+
+## Contar respuestas en dataframe
+
+#### Count()
+```{r}
+#library(plyr)
+#y = plyr::count(BD8M3108, 'p2a')
+```
+
+#### Freq()
+```{r}
+#library(DescTools)
+#tab_p18c.1 <- Freq(as.factor(BD8M3108$p18c.1))
+```
+
+#### frq()
+```{r}
+#library(sjmisc)
+#tab_p18c.1<-frq(BD8M3108$p18c.1)[[1]]
+```
+
+
+## Recode
+Dos opciones: recode() de dplyr y recode() de car
+
+* dplyr
+Recodificar categorías de una variable, estableciendo una a una las equivalencias entre las categorías originales y las categorías a crear.
+| You can use recode() directly with factors; it will preserve the existing order of levels while changing the values. Alternatively, you can use recode_factor(), which will change the order of levels to match the order of replacements
+* car
+Recodificar categorías de una variable, permitiendo la recodificación por tramos. De especial utilidad cuando se precisa reducir las categorías de variables de nivel de medición de intervalo o razón, según tramos específicos de respuesta.
+```{r}
+#install.packages("car")
+#library(car)
+#x<-rep(1:3,3)
+#recode(x, "c(1)='A'; else='B'")
+```
+## Plotly
+
+### Guardado como html
+```{r}
+#Versión full
+#htmlwidgets::saveWidget(G_genero, "G_genero.html")
+#Versión lite
+#htmlwidgets::saveWidget(partial_bundle(G_genero), "G_genero.html")
+```
+
+
+# No probados
+
+
+### Recodificar con condición transformadora (No probado)
+```{r}
+#install.packages("dplyr")
+#library(dplyr)
+#case_when(unit == "F" ~ temp, unit == "C" ~ (temp * 9/5) + 32, TRUE ~ (temp - 273.15) * 9/5 + 32)
+
+```
+
